@@ -28,7 +28,23 @@ You should have received a copy of the GNU General Public License
 along with ABC Slider. If not, see {URI to Plugin License}.
 */
 
+//impedi que algum usuario tente acessar os arquivos do plugin pela url
 if(! defined('ABSPATH') ){
     die('Você está tentando acessar os arquivos do plugin!');
     exit;
+}
+
+//Verifica se não existe uma classe chamada ABC_Slider, caso não exista, é criada uma classe com contrutor
+if(! class_exists( 'ABC_Slider' )){
+    class ABC_Slider{
+        function __construct()
+        {
+            
+        }
+    }
+}
+
+//Verifica se existe uma classe chamada ABC_Slider, caso exista é criado uma variável instanciada
+if(class_exists('ABC_Slider')){
+    $abc_slider = new ABC_Slider();
 }
