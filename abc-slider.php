@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
 * Plugin Name: ABC Slider
@@ -29,22 +29,47 @@ along with ABC Slider. If not, see {URI to Plugin License}.
 */
 
 //impedi que algum usuario tente acessar os arquivos do plugin pela url
-if(! defined('ABSPATH') ){
+if (!defined('ABSPATH')) {
     die('Você está tentando acessar os arquivos do plugin!');
     exit;
 }
 
 //Verifica se não existe uma classe chamada ABC_Slider, caso não exista, é criada uma classe com contrutor
-if(! class_exists( 'ABC_Slider' )){
-    class ABC_Slider{
+if (!class_exists('ABC_Slider')) {
+    class ABC_Slider
+    {
         function __construct()
         {
-            
+            $this->define_constants();
+        }
+
+        public function define_constants()
+        {
+            define('ABC_SLIDER_PATH', plugin_dir_path(__FILE__));
+            define('ABC_SLIDER_URL', plugin_dir_url(__FILE__));
+            define('ABC_SLIDER_VERSION', '1.0.0');
+        }
+
+        public static function activate()
+        {
+            update_option('rewrite_rules', '');
+        }
+
+        public static function deactivate()
+        {
+            flush_rewrite_rules();
+        }
+
+        public static function uninstall()
+        {
         }
     }
 }
 
 //Verifica se existe uma classe chamada ABC_Slider, caso exista é criado uma variável instanciada
-if(class_exists('ABC_Slider')){
+if (class_exists('ABC_Slider')) {
+    register_activation_hook(__FILE__, array('ABC_Slider', 'activate'));
+    register_deactivation_hook(__FILE__, array('ABC_Slider', 'deactivate'));
+    register_uninstall_hook(__FILE__, array('ABC_Slider', 'uninstall'));
     $abc_slider = new ABC_Slider();
 }
