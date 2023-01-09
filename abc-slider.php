@@ -41,6 +41,9 @@ if (!class_exists('ABC_Slider')) {
         function __construct()
         {
             $this->define_constants();
+            
+            require_once(ABC_SLIDER_PATH . 'post-types/class.abc-slider-cpt.php');
+            $ABC_Slider_Post_Type = new ABC_Slider_Post_Type();
         }
 
         public function define_constants()
@@ -58,6 +61,7 @@ if (!class_exists('ABC_Slider')) {
         public static function deactivate()
         {
             flush_rewrite_rules();
+            unregister_post_type('abc-slider');
         }
 
         public static function uninstall()
