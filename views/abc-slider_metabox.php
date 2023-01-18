@@ -2,9 +2,10 @@
     $meta = get_post_meta( $post->ID );
     $link_text = get_post_meta( $post->ID, 'abc_slider_link_text', true);
     $link_url = get_post_meta( $post->ID, 'abc_slider_link_url', true);
-    var_dump($$link_text, $link_url);
+    // var_dump($$link_text, $link_url);
 ?>
 <table class="form-table abc-slider-metabox">
+    <input type="hidden" name="abc_slider_nonce" value="<?php echo wp_create_nonce('abc_slider_nonce') ?>">
     <tr>
         <th>
             <label for="abc_slider_link_text">Link Text</label>
