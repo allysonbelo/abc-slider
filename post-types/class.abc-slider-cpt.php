@@ -52,6 +52,24 @@ if (!class_exists('ABC_Slider_Post_Type')) {
         }
 
         public function save_post( $post_id ){
+            if (isset($_POST['abc_slider_nonce'])) {
+                if (!wp_verify_nonce($_POST['abc_slider_nonce'], 'abc_slider_nonce')) {
+                    return;
+                }
+            }
+
+            if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+                return;
+            }
+
+            if (isset($_POST['post_type']) && $_POST['post_type'] === 'abc_slider') {
+                if (!current_user_can('edit_post', $post_id)) {
+                    return;
+                } elseif (!current_user_can('edit_post', $post_id)) {
+                    return;
+                }
+            }
+
             if(isset($_POST['action']) && $_POST['action'] == 'editpost'){
                 $old_link_text = get_post_meta( $post_id, 'abc_slider_link_text', true);
                 $new_link_text = $_POST['abc_slider_link_text'];
