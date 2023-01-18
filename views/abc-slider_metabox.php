@@ -36,4 +36,20 @@
             >
         </td>
     </tr>
+    <tr>
+        <th>
+            <label for="abc_slider_link_image">Link Image</label>
+        </th>
+        <td>
+            <input 
+                type="url" 
+                disabled
+                name="abc_slider_link_image" 
+                id="abc_slider_link_image" 
+                class="" 
+                required
+                value=" <?php echo get_post_thumbnail_id(  ); ?> " 
+            >
+        </td>
+    </tr>
 </table>

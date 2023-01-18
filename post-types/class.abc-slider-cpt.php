@@ -44,6 +44,7 @@ if (!class_exists('ABC_Slider_Post_Type')) {
         {
             $columns['abc_slider_link_text'] = esc_html__('Link Text', 'abc-slider');
             $columns['abc_slider_link_url'] = esc_html__('Link URL', 'abc-slider');
+            $columns['abc_slider_link_image'] = esc_html__('Link Image', 'abc-slider');
             return $columns;
         }
 
@@ -55,6 +56,9 @@ if (!class_exists('ABC_Slider_Post_Type')) {
                     break;
                 case 'abc_slider_link_url':
                     echo esc_url(get_post_meta($post_id, 'abc_slider_link_url', true));
+                    break;
+                case 'abc_slider_link_image':
+                    echo esc_url(the_post_thumbnail( array(80,80), ['class' => 'testebelo'] ));
                     break;
             }
         }
