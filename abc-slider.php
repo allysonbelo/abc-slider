@@ -41,6 +41,8 @@ if (!class_exists('ABC_Slider')) {
         function __construct()
         {
             $this->define_constants();
+
+            add_action('admin_menu', array($this, 'add_menu'));
             
             require_once(ABC_SLIDER_PATH . 'post-types/class.abc-slider-cpt.php');
             $ABC_Slider_Post_Type = new ABC_Slider_Post_Type();
@@ -66,6 +68,41 @@ if (!class_exists('ABC_Slider')) {
 
         public static function uninstall()
         {
+        }
+
+        public function add_menu(){
+            add_menu_page( 
+                'ABC Slider Options',
+                'ABC Slider',
+                'manage_options',
+                'abc_slider_admin',
+                array($this, 'abc_slider_settings_page'),
+                'dashicons-images-alt2',
+            );
+
+            add_submenu_page(
+                'abc_slider_admin',
+                'Manage Slides',
+                'Manage Slides',
+                'manage_options',
+                'edit.php?post_type=abc-slider',
+                null,
+                null
+            );
+
+            add_submenu_page(
+                'abc_slider_admin',
+                'Add New Slide',
+                'Add New Slide',
+                'manage_options',
+                'post-new.php?post_type=abc-slider',
+                null,
+                null
+            );
+        }
+
+        public function abc_slider_settings_page(){
+            echo 'This is a teste page';
         }
     }
 }
