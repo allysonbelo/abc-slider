@@ -46,6 +46,9 @@ if (!class_exists('ABC_Slider')) {
             
             require_once(ABC_SLIDER_PATH . 'post-types/class.abc-slider-cpt.php');
             $ABC_Slider_Post_Type = new ABC_Slider_Post_Type();
+
+            require_once(ABC_SLIDER_PATH . 'class.abc-slider-settings.php');
+            $ABC_Slider_Settings = new ABC_Slider_Settings();
         }
 
         public function define_constants()
@@ -102,7 +105,7 @@ if (!class_exists('ABC_Slider')) {
         }
 
         public function abc_slider_settings_page(){
-            echo 'This is a teste page';
+            require(ABC_SLIDER_PATH . 'views/settings-page.php');
         }
     }
 }
