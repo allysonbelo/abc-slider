@@ -11,7 +11,7 @@ if(!class_exists('ABC_Slider_Settings')){
 
         public function admin_init(){
 
-            register_setting('abc_slider_group', 'abc_slider_options');
+            register_setting('abc_slider_group', 'abc_slider_options', array($this, 'abc_slider_validate'));
 
             add_settings_section(
                 'abc_slider_main_section',
@@ -40,7 +40,10 @@ if(!class_exists('ABC_Slider_Settings')){
                 'Slider Title',
                 array($this, 'abc_slider_title_callback'),
                 'abc_slider_page2',
-                'abc_slider_second_section'
+                'abc_slider_second_section',
+                array(
+                    'label_for' => 'abc_slider_title'
+                )
             ); 
 
             add_settings_field(
@@ -48,7 +51,10 @@ if(!class_exists('ABC_Slider_Settings')){
                 'Dsiplay Bullets',
                 array($this, 'abc_slider_bullets_callback'),
                 'abc_slider_page2',
-                'abc_slider_second_section'
+                'abc_slider_second_section',
+                array(
+                    'label_for' => 'abc_slider_bullets'
+                )
             ); 
 
             add_settings_field(
@@ -56,7 +62,14 @@ if(!class_exists('ABC_Slider_Settings')){
                 'Slide Style',
                 array($this, 'abc_slider_style_callback'),
                 'abc_slider_page2',
-                'abc_slider_second_section'
+                'abc_slider_second_section',
+                array(
+                    'items' => array(
+                        'style-1',
+                        'style-2'
+                    ),
+                    'label_for' => 'abc_slider_style'
+                )
             ); 
         }
 
@@ -66,7 +79,7 @@ if(!class_exists('ABC_Slider_Settings')){
             <?php 
         }
 
-        public function abc_slider_title_callback(){
+        public function abc_slider_title_callback($args){
             ?>
                 <input 
                 type="text" 
@@ -76,7 +89,7 @@ if(!class_exists('ABC_Slider_Settings')){
             <?php
         }
 
-        public function abc_slider_bullets_callback(){
+        public function abc_slider_bullets_callback($args){
             ?>
             <input 
             type="checkbox" 
@@ -92,18 +105,39 @@ if(!class_exists('ABC_Slider_Settings')){
             <?php
         }
 
-        public function abc_slider_style_callback(){
+        public function abc_slider_style_callback($args){
             ?>
             <select 
                 id="abc_slider_style"
                 name="abc_slider_options[abc_slider_style]" >
-                <option value="style-1"
-                    <?php isset(self::$options['abc_slider_style']) ? selected('style-1', self::$options['abc_slider_style'], true) : ''; ?>>Style-1</option>
-                <option value="style-2"
-                    <?php isset(self::$options['abc_slider_style']) ? selected('style-2', self::$options['abc_slider_style'], true) : ''; ?>>Style-2</option>
+                <?php 
+                foreach($args['items'] as $item):
+                ?>
+                    <option value="<?php echo esc_attr($item);?>"
+                        <?php 
+                        isset(self::$options['abc_slider_style']) ? selected($item, self::$options['abc_slider_style'], true) : ''; 
+                        ?>
+                    >
+                        <?php echo esc_html(ucfirst($item)); ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
             <?php
         }
+
+        public function abc_slider_validate($input){
+            $new_input = array();
+            foreach($input as $key => $value){
+                switch($key){
+                    case 'abc_slider_title' :
+                        if(empty($value)){
+                            $value = 'Please, type some text';
+                        }
+                        $new_input[$key] = sanitize_text_field($value);
+                    break;
+                }
+            }
+            return $new_input;
+        }
     }
 }
-; ?>
