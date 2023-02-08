@@ -105,6 +105,14 @@ if (!class_exists('ABC_Slider')) {
         }
 
         public function abc_slider_settings_page(){
+            if(! current_user_can('manage_options')){
+                return;
+            }
+            if(isset($_GET['settings-updated'])){
+                add_settings_error('abc_slider_options', 'abc_slider_message', 'Settings Saves', 'success' );
+            }
+            settings_errors('abc_slider_options');
+
             require(ABC_SLIDER_PATH . 'views/settings-page.php');
         }
     }

@@ -131,6 +131,7 @@ if(!class_exists('ABC_Slider_Settings')){
                 switch($key){
                     case 'abc_slider_title' :
                         if(empty($value)){
+                            add_settings_error('abc_slider_options', 'abc_slider_message', 'The title field can not be left empty', 'warning');
                             $value = 'Please, type some text';
                         }
                         $new_input[$key] = sanitize_text_field($value);
