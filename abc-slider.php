@@ -49,6 +49,9 @@ if (!class_exists('ABC_Slider')) {
 
             require_once(ABC_SLIDER_PATH . 'class.abc-slider-settings.php');
             $ABC_Slider_Settings = new ABC_Slider_Settings();
+
+            require_once(ABC_SLIDER_PATH . 'shortcodes/class.abc-slider-shortcode.php');
+            $ABC_Slider_Shortcode = new ABC_Slider_Shortcode();
         }
 
         public function define_constants()
