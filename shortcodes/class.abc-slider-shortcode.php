@@ -24,6 +24,10 @@ if (!class_exists('ABC_Slider_Shortcode')) {
             if(!empty( $id)){
                 $id = array_map('absint', explode(',', $id));
             }
+
+            ob_start();
+            require( ABC_SLIDER_PATH . 'views/abc-slider_shortcode.php');
+            return ob_get_clean();
         }
     }
 }
