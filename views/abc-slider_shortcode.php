@@ -18,7 +18,7 @@
             $button_url = get_post_meta( get_the_ID(), 'abc_slider_link_url', true );
             ?>
                 <li>
-                    <?php the_post_thumbnail(array(650,650), array('class' => 'img-fluid')); ?>
+                    <?php the_post_thumbnail('large', array('class' => 'img-fluid')); ?>
                     <div class="abcs-container">
                         <div class="slider-details-container">
                             <div class="wrapper">

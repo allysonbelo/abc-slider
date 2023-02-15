@@ -1,0 +1,11 @@
+.abc-slider-metabox label{
+    color: red;
+}
+
+.abc-slider-metabox td{
+    padding: 5px;
+}
+
+.abc-slider-metabox th{
+    padding: 10px 10px 5px 0;
+}

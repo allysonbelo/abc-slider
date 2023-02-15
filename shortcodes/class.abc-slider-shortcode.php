@@ -27,6 +27,10 @@ if (!class_exists('ABC_Slider_Shortcode')) {
 
             ob_start();
             require( ABC_SLIDER_PATH . 'views/abc-slider_shortcode.php');
+            wp_enqueue_script('abc-slider-main-jq');
+            wp_enqueue_script('abc-slider-options-js');
+            wp_enqueue_style('abc-slider-main-css');
+            wp_enqueue_style('abc-slider-style-css');
             return ob_get_clean();
         }
     }
