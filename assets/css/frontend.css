@@ -47,7 +47,6 @@
 
 .abc-slider .slider-details-container .subtitle p {
     width: 350px;
-    background-color: red;
 }
 
 .abc-slider .slider-details-container .slider-title {
@@ -78,4 +77,48 @@
 
 .abc-slider .flex-control-nav li {
     margin: 0 3px !important;
+}
+
+/* Style 1 */
+
+.abc-slider.style-1 .slider-details-container .link{
+    background-color: #1d4671;
+}
+
+.abc-slider.style-1 .flex-control-paging li a.flex-active {
+    background: rgb(182, 2, 2) !important;
+}
+
+.abc-slider.style-1 .flex-control-paging li a {
+    background: rgb(247, 247, 247);
+}
+
+/* Style 2 */
+
+.abc-slider.style-2 .slider-details-container .link{
+    background-color: #71481d;
+}
+
+.abc-slider.style-2 .flex-control-paging li a.flex-active {
+    background: rgb(2, 182, 14) !important;
+    width: 25px;
+}
+
+.abc-slider.style-2 .flex-control-paging li a {
+    background: rgb(247, 247, 247);
+    height: 10px;
+    width: 15px;
+    border-radius: 0;
+}
+
+.flexslider .slides > li{
+    width: 600px;
+    height: 450px;
+}
+
+.flexslider .slides img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(.5);
 }
