@@ -8,7 +8,7 @@
     <input type="hidden" name="abc_slider_nonce" value="<?php echo wp_create_nonce('abc_slider_nonce') ?>">
     <tr>
         <th>
-            <label for="abc_slider_link_text">Link Text</label>
+            <label for="abc_slider_link_text"> <?php esc_html_e('Link Text', 'abc-slider'); ?> </label>
         </th>
         <td>
             <input 
@@ -23,7 +23,7 @@
     </tr>
     <tr>
         <th>
-            <label for="abc_slider_link_url">Link Url</label>
+            <label for="abc_slider_link_url"><?php esc_html_e('Link Url', 'abc-slider'); ?></label>
         </th>
         <td>
             <input 
@@ -38,7 +38,7 @@
     </tr>
     <tr>
         <th>
-            <label for="abc_slider_link_image">Link Image</label>
+            <label for="abc_slider_link_image"><?php esc_html_e('Link Image', 'abc-slider'); ?></label>
         </th>
         <td>
             <input 

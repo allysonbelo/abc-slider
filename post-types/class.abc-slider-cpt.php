@@ -16,11 +16,11 @@ if (!class_exists('ABC_Slider_Post_Type')) {
         public function create_post_type()
         {
             register_post_type('abc-slider', array(
-                'label' => 'Slider',
-                'description' => 'Sliders',
+                'label' => esc_html__('Slider', 'abc-slider'),
+                'description' => esc_html__('Sliders', 'abc-slider'),
                 'labels'    => array(
-                    'name' => 'Sliders',
-                    'singular_name' => 'Slider'
+                    'name' => esc_html__('Sliders', 'abc-slider'),
+                    'singular_name' => esc_html__('Slider', 'abc-slider')
                 ),
                 'public' => true,
                 'supports' => array('title', 'editor', 'thumbnail'),
@@ -73,7 +73,7 @@ if (!class_exists('ABC_Slider_Post_Type')) {
         {
             add_meta_box(
                 'abc_slider_meta_box',
-                'Link Options',
+                esc_html__('Link Options', 'abc-slider'),
                 array($this, 'add_inner_meta_boxes'),
                 'abc-slider',
                 'normal',
@@ -113,7 +113,7 @@ if (!class_exists('ABC_Slider_Post_Type')) {
                 $new_link_url = $_POST['abc_slider_link_url'];
 
                 if (empty($new_link_text)) {
-                    update_post_meta($post_id, 'abc_slider_link_text', 'Add some text');
+                    update_post_meta($post_id, 'abc_slider_link_text', esc_html__('Add some text', 'abc-slider'));
                 } else {
                     update_post_meta($post_id, 'abc_slider_link_text', sanitize_text_field($new_link_text), $old_link_text);
                 }
