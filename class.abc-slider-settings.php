@@ -17,21 +17,21 @@ if (!class_exists('ABC_Slider_Settings')) {
 
             add_settings_section(
                 'abc_slider_main_section',
-                'How does it work?',
+                esc_html__('How does it work?', 'abc-slider'),
                 null,
                 'abc_slider_page1'
             );
 
             add_settings_section(
                 'abc_slider_second_section',
-                'Other Plugin Options',
+                esc_html__('Other Plugin Options', 'abc-slider'),
                 null,
                 'abc_slider_page2'
             );
 
             add_settings_field(
                 'abc_slider_shortcode',
-                'Shortcode',
+                esc_html__('Shortcode', 'abc-slider'),
                 array($this, 'abc_slider_shortcode_callback'),
                 'abc_slider_page1',
                 'abc_slider_main_section'
@@ -39,7 +39,7 @@ if (!class_exists('ABC_Slider_Settings')) {
 
             add_settings_field(
                 'abc_slider_title',
-                'Slider Title',
+                esc_html__('Slider Title', 'abc-slider'),
                 array($this, 'abc_slider_title_callback'),
                 'abc_slider_page2',
                 'abc_slider_second_section',
@@ -50,7 +50,7 @@ if (!class_exists('ABC_Slider_Settings')) {
 
             add_settings_field(
                 'abc_slider_bullets',
-                'Dsiplay Bullets',
+                esc_html__('Dsiplay Bullets', 'abc-slider'),
                 array($this, 'abc_slider_bullets_callback'),
                 'abc_slider_page2',
                 'abc_slider_second_section',
@@ -61,7 +61,7 @@ if (!class_exists('ABC_Slider_Settings')) {
 
             add_settings_field(
                 'abc_slider_style',
-                'Slider Style',
+                esc_html__('Slider Style', 'abc-slider'),
                 array($this, 'abc_slider_style_callback'),
                 'abc_slider_page2',
                 'abc_slider_second_section',
@@ -78,7 +78,7 @@ if (!class_exists('ABC_Slider_Settings')) {
         public function abc_slider_shortcode_callback()
         {
 ?>
-            <span>Use the shortcode [abc_slider] to display the slider in any page/post/widget</span>
+            <span> <?php esc_html_e('Use the shortcode [abc_slider] to display the slider in any page/post/widget', 'abc-slider'); ?> </span>
         <?php
         }
 
@@ -97,7 +97,7 @@ if (!class_exists('ABC_Slider_Settings')) {
                                                                                                                         checked("1", self::$options['abc_slider_bullets'], true);
                                                                                                                     }
                                                                                                                     ?> />
-            <label for="abc_slider_bullets">Whether to display bullets or not</label>
+            <label for="abc_slider_bullets"><?php _e('Whether to display bullets or not', 'abc-slider'); ?></label>
         <?php
         }
 
@@ -126,8 +126,8 @@ if (!class_exists('ABC_Slider_Settings')) {
                 switch ($key) {
                     case 'abc_slider_title':
                         if (empty($value)) {
-                            add_settings_error('abc_slider_options', 'abc_slider_message', 'The title field can not be left empty', 'error');
-                            $value = 'Please, type some text';
+                            add_settings_error('abc_slider_options', 'abc_slider_message', esc_html__('The title field can not be left empty', 'abc-slider'), esc_html__('The title field can not be left empty', 'abc-slider'), 'error');
+                            $value = __('Please, type some text', 'abc-slider');
                         }
                         $new_input[$key] = sanitize_text_field($value);
                         break;

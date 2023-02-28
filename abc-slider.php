@@ -41,6 +41,7 @@ if (!class_exists('ABC_Slider')) {
         function __construct()
         {
             $this->define_constants();
+            $this->load_textdomain();
 
             require_once(ABC_SLIDER_PATH . 'functions/functions.php');
 
@@ -81,10 +82,18 @@ if (!class_exists('ABC_Slider')) {
         {
         }
 
+        public function load_textdomain(){
+            load_plugin_textdomain(
+                'abc-slider',
+                false,
+                dirname(plugin_basename(__FILE__)) . '/languages/'
+            );
+        }
+
         public function add_menu(){
             add_menu_page( 
-                'ABC Slider Options',
-                'ABC Slider',
+                esc_html__('ABC Slider Options', 'abc-slider'),
+                esc_html__('ABC Slider', 'abc-slider'),
                 'manage_options',
                 'abc_slider_admin',
                 array($this, 'abc_slider_settings_page'),
@@ -93,8 +102,8 @@ if (!class_exists('ABC_Slider')) {
 
             add_submenu_page(
                 'abc_slider_admin',
-                'Manage Slides',
-                'Manage Slides',
+                esc_html__('Manage Slides', 'abc-slider'),
+                esc_html__('Manage Slides', 'abc-slider'),
                 'manage_options',
                 'edit.php?post_type=abc-slider',
                 null,
@@ -103,8 +112,8 @@ if (!class_exists('ABC_Slider')) {
 
             add_submenu_page(
                 'abc_slider_admin',
-                'Add New Slide',
-                'Add New Slide',
+                esc_html__('Add New Slide', 'abc-slider'),
+                esc_html__('Add New Slide', 'abc-slider'),
                 'manage_options',
                 'post-new.php?post_type=abc-slider',
                 null,
@@ -117,7 +126,7 @@ if (!class_exists('ABC_Slider')) {
                 return;
             }
             if(isset($_GET['settings-updated'])){
-                add_settings_error('abc_slider_options', 'abc_slider_message', 'Settings Saves', 'success' );
+                add_settings_error('abc_slider_options', 'abc_slider_message', esc_html__('Settings Saves', 'abc-slider'), 'success' );
             }
             settings_errors('abc_slider_options');
 
