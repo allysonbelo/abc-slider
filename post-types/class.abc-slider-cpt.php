@@ -5,7 +5,7 @@ if (!class_exists('ABC_Slider_Post_Type')) {
     {
         function __construct()
         {
-            add_action('init',  array($this, 'create_post_type'));
+            add_action('init', array($this, 'create_post_type'));
             add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
             add_action('save_post', array($this, 'save_post'), 10, 2);
             add_filter('manage_abc-slider_posts_columns', array($this, 'abc_slider_cpt_columns'));
@@ -15,35 +15,39 @@ if (!class_exists('ABC_Slider_Post_Type')) {
 
         public function create_post_type()
         {
-            register_post_type('abc-slider', array(
-                'label' => esc_html__('Slider', 'abc-slider'),
-                'description' => esc_html__('Sliders', 'abc-slider'),
-                'labels'    => array(
-                    'name' => esc_html__('Sliders', 'abc-slider'),
-                    'singular_name' => esc_html__('Slider', 'abc-slider')
-                ),
-                'public' => true,
-                'supports' => array('title', 'editor', 'thumbnail'),
-                'hierarchical' => false,
-                'show_ui' => true,
-                'show_in_menu' => false,
-                'menu_position' => 5,
-                'show_in_admin_bar' => true,
-                'show_in_nav_menus' => true,
-                'can_export' => true,
-                'has_archive' => false,
-                'exclude_from_search' => false,
-                'publicly_queryable' => true,
-                'show_in_rest' => true,
-                'menu_icon' => 'dashicons-images-alt2',
-                // 'register_meta_box_cb' => array($this, 'add_meta_boxes')
-            ));
+            register_post_type(
+                'abc-slider',
+                array(
+                    'label' => esc_html__('Slider', 'abc-slider'),
+                    'description'   => esc_html__('Sliders', 'abc-slider'),
+                    'labels' => array(
+                        'name'  => esc_html__('Sliders', 'abc-slider'),
+                        'singular_name' => esc_html__('Slider', 'abc-slider'),
+                    ),
+                    'public'    => true,
+                    'supports'  => array('title', 'editor', 'thumbnail'),
+                    'hierarchical'  => false,
+                    'show_ui'   => true,
+                    'show_in_menu'  => false,
+                    'menu_position' => 5,
+                    'show_in_admin_bar' => true,
+                    'show_in_nav_menus' => true,
+                    'can_export'    => true,
+                    'has_archive'   => false,
+                    'exclude_from_search'   => false,
+                    'publicly_queryable'    => true,
+                    'show_in_rest'  => true,
+                    'menu_icon' => 'dashicons-images-alt2',
+                    //'register_meta_box_cb'  =>  array( $this, 'add_meta_boxes' )
+                )
+            );
         }
 
         public function abc_slider_cpt_columns($columns)
         {
             $columns['abc_slider_link_text'] = esc_html__('Link Text', 'abc-slider');
             $columns['abc_slider_link_url'] = esc_html__('Link URL', 'abc-slider');
+            $columns['abc_slider_link_id'] = esc_html__('ID', 'abc-slider');
             $columns['abc_slider_link_image'] = esc_html__('Link Image', 'abc-slider');
             return $columns;
         }
@@ -58,14 +62,17 @@ if (!class_exists('ABC_Slider_Post_Type')) {
                     echo esc_url(get_post_meta($post_id, 'abc_slider_link_url', true));
                     break;
                 case 'abc_slider_link_image':
-                    echo esc_url(the_post_thumbnail( array(80,80), ['class' => 'testebelo'] ));
+                    echo esc_url(the_post_thumbnail(array(80, 80), ['class' => 'testebelo']));
+                    break;
+                case 'abc_slider_link_id':
+                    echo the_ID();
                     break;
             }
         }
 
-        public function abc_slider_sortable_columns($columns){
+        public function abc_slider_sortable_columns($columns)
+        {
             $columns['abc_slider_link_text'] = 'abc_slider_link_text';
-            // $columns['abc_slider_link_url'] = 'abc_slider_link_url';
             return $columns;
         }
 
@@ -77,7 +84,7 @@ if (!class_exists('ABC_Slider_Post_Type')) {
                 array($this, 'add_inner_meta_boxes'),
                 'abc-slider',
                 'normal',
-                'high',
+                'high'
             );
         }
 
@@ -98,8 +105,8 @@ if (!class_exists('ABC_Slider_Post_Type')) {
                 return;
             }
 
-            if (isset($_POST['post_type']) && $_POST['post_type'] === 'abc_slider') {
-                if (!current_user_can('edit_post', $post_id)) {
+            if (isset($_POST['post_type']) && $_POST['post_type'] === 'abc-slider') {
+                if (!current_user_can('edit_page', $post_id)) {
                     return;
                 } elseif (!current_user_can('edit_post', $post_id)) {
                     return;

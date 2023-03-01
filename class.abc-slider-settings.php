@@ -1,7 +1,9 @@
 <?php
+
 if (!class_exists('ABC_Slider_Settings')) {
     class ABC_Slider_Settings
     {
+
         public static $options;
 
         public function __construct()
@@ -50,7 +52,7 @@ if (!class_exists('ABC_Slider_Settings')) {
 
             add_settings_field(
                 'abc_slider_bullets',
-                esc_html__('Dsiplay Bullets', 'abc-slider'),
+                esc_html__('Display Bullets', 'abc-slider'),
                 array($this, 'abc_slider_bullets_callback'),
                 'abc_slider_page2',
                 'abc_slider_second_section',
@@ -72,13 +74,14 @@ if (!class_exists('ABC_Slider_Settings')) {
                     ),
                     'label_for' => 'abc_slider_style'
                 )
+
             );
         }
 
         public function abc_slider_shortcode_callback()
         {
 ?>
-            <span> <?php esc_html_e('Use the shortcode [abc_slider] to display the slider in any page/post/widget', 'abc-slider'); ?> </span>
+            <span><?php esc_html_e('Use the shortcode [abc_slider] to display the slider in any page/post/widget', 'abc-slider'); ?></span>
         <?php
         }
 
@@ -93,11 +96,12 @@ if (!class_exists('ABC_Slider_Settings')) {
         {
         ?>
             <input type="checkbox" name="abc_slider_options[abc_slider_bullets]" id="abc_slider_bullets" value="1" <?php
-                                                                                                                    if (isset(self::$options['abc_slider_bullets'])) {
-                                                                                                                        checked("1", self::$options['abc_slider_bullets'], true);
-                                                                                                                    }
-                                                                                                                    ?> />
-            <label for="abc_slider_bullets"><?php _e('Whether to display bullets or not', 'abc-slider'); ?></label>
+                                                                                                                if (isset(self::$options['abc_slider_bullets'])) {
+                                                                                                                    checked("1", self::$options['abc_slider_bullets'], true);
+                                                                                                                }
+                                                                                                                ?> />
+            <label for="abc_slider_bullets"><?php esc_html_e('Whether to display bullets or not', 'abc-slider'); ?></label>
+
         <?php
         }
 
@@ -109,12 +113,11 @@ if (!class_exists('ABC_Slider_Settings')) {
                 foreach ($args['items'] as $item) :
                 ?>
                     <option value="<?php echo esc_attr($item); ?>" <?php
-                                                                    isset(self::$options['abc_slider_style']) ? selected($item, self::$options['abc_slider_style'], true) : '';
-                                                                    ?>>
+                                                                        isset(self::$options['abc_slider_style']) ? selected($item, self::$options['abc_slider_style'], true) : '';
+                                                                        ?>>
                         <?php echo esc_html(ucfirst($item)); ?>
                     </option>
                 <?php endforeach; ?>
-
             </select>
 <?php
         }
@@ -126,14 +129,14 @@ if (!class_exists('ABC_Slider_Settings')) {
                 switch ($key) {
                     case 'abc_slider_title':
                         if (empty($value)) {
-                            add_settings_error('abc_slider_options', 'abc_slider_message', esc_html__('The title field can not be left empty', 'abc-slider'), esc_html__('The title field can not be left empty', 'abc-slider'), 'error');
-                            $value = __('Please, type some text', 'abc-slider');
+                            add_settings_error('abc_slider_options', 'abc_slider_message', esc_html__('The title field can not be left empty', 'abc-slider'), 'error');
+                            $value = esc_html__('Please, type some text', 'abc-slider');
                         }
                         $new_input[$key] = sanitize_text_field($value);
                         break;
                     default:
-                    $new_input[$key] = sanitize_text_field($value);
-                    break;
+                        $new_input[$key] = sanitize_text_field($value);
+                        break;
                 }
             }
             return $new_input;
