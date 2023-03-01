@@ -17,6 +17,10 @@
 
                 $button_text = get_post_meta(get_the_ID(), 'abc_slider_link_text', true);
                 $button_url = get_post_meta(get_the_ID(), 'abc_slider_link_url', true);
+                $link_text_color = get_post_meta(get_the_ID(), 'abc_slider_color_text', true);
+                $link_url_color = get_post_meta(get_the_ID(), 'abc_slider_color_link', true);
+                $btn_color = get_post_meta(get_the_ID(), 'abc_slider_color_btn', true);
+                $description_color = get_post_meta(get_the_ID(), 'abc_slider_color_description', true)
 
         ?>
                 <li>
@@ -32,11 +36,11 @@
                         <div class="slider-details-container">
                             <div class="wrapper">
                                 <div class="slider-title">
-                                    <h2><?php the_title(); ?></h2>
+                                    <h2 style="color: <?php echo (isset($link_text_color)) ? esc_url($link_text_color) : '#FFFFFF'; ?>"><?php the_title(); ?></h2> 
                                 </div>
                                 <div class="slider-description">
-                                    <div class="subtitle"><?php the_content(); ?></div>
-                                    <a class="link" href="<?php echo esc_attr($button_url); ?>"><?php echo esc_html($button_text); ?></a>
+                                    <div style="color: <?php echo (isset($description_color)) ? esc_url($description_color) : '#FFFFFF'; ?>" class="subtitle"><?php the_content(); ?></div>
+                                    <a style="background-color: <?php echo (isset($btn_color)) ? esc_url($btn_color) : '#FFFFFF'; ?>" class="link" href="<?php echo esc_attr($button_url); ?>"><?php echo esc_html($button_text); ?></a>
                                 </div>
                             </div>
                         </div>

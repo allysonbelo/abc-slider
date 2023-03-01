@@ -116,8 +116,21 @@ if (!class_exists('ABC_Slider_Post_Type')) {
             if (isset($_POST['action']) && $_POST['action'] == 'editpost') {
                 $old_link_text = get_post_meta($post_id, 'abc_slider_link_text', true);
                 $new_link_text = $_POST['abc_slider_link_text'];
+
                 $old_link_url = get_post_meta($post_id, 'abc_slider_link_url', true);
                 $new_link_url = $_POST['abc_slider_link_url'];
+
+                $old_link_text_color = get_post_meta($post_id, 'abc_slider_color_text', true);
+                $new_link_text_color = $_POST['abc_slider_color_text'];
+
+                $old_link_url_color = get_post_meta($post_id, 'abc_slider_color_link', true);
+                $new_link_url_color = $_POST['abc_slider_color_link'];
+
+                $old_link_btn_color = get_post_meta($post_id, 'abc_slider_color_btn', true);
+                $new_link_btn_color = $_POST['abc_slider_color_btn'];
+
+                $old_description_color = get_post_meta($post_id, 'abc_slider_color_description', true);
+                $new_description_color = $_POST['abc_slider_color_description'];
 
                 if (empty($new_link_text)) {
                     update_post_meta($post_id, 'abc_slider_link_text', esc_html__('Add some text', 'abc-slider'));
@@ -129,6 +142,30 @@ if (!class_exists('ABC_Slider_Post_Type')) {
                     update_post_meta($post_id, 'abc_slider_link_url', '#');
                 } else {
                     update_post_meta($post_id, 'abc_slider_link_url', sanitize_text_field($new_link_url), $old_link_url);
+                }
+
+                if (empty($new_link_text_color)) {
+                    update_post_meta($post_id, 'abc_slider_color_text', '#ff0000');
+                } else {
+                    update_post_meta($post_id, 'abc_slider_color_text', sanitize_hex_color($new_link_text_color), $old_link_text_color);
+                }
+
+                if (empty($new_link_url_color)) {
+                    update_post_meta($post_id, 'abc_slider_color_link', '#ff0000');
+                } else {
+                    update_post_meta($post_id, 'abc_slider_color_link', sanitize_hex_color($new_link_url_color), $old_link_url_color);
+                }
+
+                if (empty($new_link_btn_color)) {
+                    update_post_meta($post_id, 'abc_slider_color_btn', '#ff0000');
+                } else {
+                    update_post_meta($post_id, 'abc_slider_color_btn', sanitize_hex_color($new_link_btn_color), $old_link_btn_color);
+                }
+
+                if (empty($new_description_color)) {
+                    update_post_meta($post_id, 'abc_slider_color_description', '#ff0000');
+                } else {
+                    update_post_meta($post_id, 'abc_slider_color_description', sanitize_hex_color($new_description_color), $old_description_color);
                 }
             }
         }
